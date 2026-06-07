@@ -48,7 +48,7 @@
   .err{color:#ff6b6b;font-size:13px;margin-top:10px;text-align:center;min-height:18px}
 
   /* App */
-  .app{padding:30px 0 80px;display:none}
+  .app{padding:30px 0 80px}
   .app-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
   .app-head h1{font-size:clamp(30px,5vw,46px);text-transform:uppercase}
   .count{color:var(--muted);font-size:14px}
@@ -261,18 +261,21 @@
   }
   async function handleFiles(files){
     if(!files||!files.length) return;
+    $('formErr').textContent='';
     $('upLabel').innerHTML='<span class="spinner"></span> Envoi des photos…';
+    let lastErr='';
     for(const file of files){
       try{
         const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
         const path = Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
         const { error } = await sb.storage.from(cfg.bucket).upload(path, file, { upsert:false, contentType:file.type });
-        if(error){ console.error(error); continue; }
+        if(error){ console.error(error); lastErr=error.message; continue; }
         const { data } = sb.storage.from(cfg.bucket).getPublicUrl(path);
         photos.push(data.publicUrl);
-      }catch(err){ console.error(err); }
+      }catch(err){ console.error(err); lastErr=err.message||String(err); }
     }
     $('upLabel').innerHTML='📷 Cliquez pour choisir plusieurs photos (ou glissez-les ici)';
+    if(lastErr){ $('formErr').textContent='⚠️ Photo non envoyée : '+lastErr+' — vérifie que le bucket « '+cfg.bucket+' » existe (Storage) et est public.'; }
     renderThumbs();
   }
   $('fileInput').addEventListener('change', e=>{ handleFiles(e.target.files); e.target.value=''; });
