@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Véhicules en vente — GC Performance Wissembourg</title>
+<meta name="description" content="Véhicules d'occasion à vendre chez GC Performance, garage multimarque à Wissembourg (67). Voitures contrôlées et entretenues." />
+<meta name="theme-color" content="#0A0A0B" />
+<link rel="canonical" href="https://www.gcperformance67.fr/vehicules.html" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0A0A0B;--surface:#121215;--surface-2:#1A1A1F;--border:#2A2A32;--border-2:#37373f;--primary:#E11D2A;--primary-h:#F23644;--text:#F5F5F6;--muted:#A2A2AD;--muted-2:#7B7B86;--radius:16px;--maxw:1200px;--ease:cubic-bezier(.2,.7,.2,1);--glow:0 22px 60px -20px rgba(225,29,42,.55)}
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{margin:0;padding:0;list-style:none}
+  h1,h2,h3{margin:0;line-height:1.05}
+  .display{font-family:'Bebas Neue','Inter',sans-serif;font-weight:400;letter-spacing:.02em;line-height:.9}
+  .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;white-space:nowrap;transition:transform .2s var(--ease),background .2s,border-color .2s}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:var(--glow)}
+  .btn-primary:hover{background:var(--primary-h);transform:translateY(-3px)}
+  .btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border-color:var(--border-2)}
+  .btn-ghost:hover{border-color:#fff;transform:translateY(-3px)}
+  .btn svg{width:18px;height:18px}
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo img{height:52px;width:auto;display:block}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;font-weight:600;color:var(--muted);transition:color .18s}
+  .nav-links a:hover,.nav-links a.active{color:#fff}
+  .burger{display:none;width:48px;height:48px;border:1px solid var(--border-2);background:var(--surface);border-radius:12px;cursor:pointer}
+  .burger svg{width:22px;height:22px;color:#fff;margin:auto}
+  /* header band */
+  .page-head{padding:64px 0 40px;position:relative;border-bottom:1px solid var(--border);background:radial-gradient(700px 360px at 80% -10%,rgba(225,29,42,.2),transparent 60%)}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+  .page-head h1{font-size:clamp(44px,7vw,86px);text-transform:uppercase;margin:14px 0 14px}
+  .page-head p{color:var(--muted);max-width:60ch;font-size:17px}
+  /* grid */
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:56px 0 90px}
+  .vcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s var(--ease),border-color .25s}
+  .vcard:hover{transform:translateY(-6px);border-color:var(--border-2)}
+  .vphoto{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-2)}
+  .vslides{position:absolute;inset:0}
+  .vslides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+  .vslides img.on{opacity:1}
+  .vnav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:none;background:rgba(10,10,11,.55);color:#fff;cursor:pointer;display:grid;place-items:center;z-index:3;backdrop-filter:blur(4px);opacity:.85;transition:opacity .2s,background .2s}
+  .vphoto:hover .vnav{opacity:1}
+  .vnav:hover{background:var(--primary)}
+  .vnav.prev{left:10px}.vnav.next{right:10px}
+  .vnav svg{width:18px;height:18px}
+  .vcount{position:absolute;top:12px;right:12px;background:rgba(10,10,11,.6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;z-index:3;backdrop-filter:blur(4px)}
+  .vdots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:84%;z-index:3}
+  .vdots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:background .2s}
+  .vdots i.on{background:#fff}
+  .vopts{display:flex;flex-wrap:wrap;gap:7px}
+  .vopts span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#d6d7dc;background:rgba(225,29,42,.1);border:1px solid rgba(225,29,42,.22);border-radius:999px;padding:4px 11px}
+  .vopts span svg{width:13px;height:13px;color:var(--primary)}
+  .vsold{position:absolute;top:14px;left:14px;background:#dc2626;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;z-index:2}
+  .vbody{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1}
+  .vtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .vtitle{font-size:20px;font-weight:700}
+  .vprice{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--primary);line-height:1;white-space:nowrap}
+  .vspecs{display:flex;flex-wrap:wrap;gap:8px}
+  .vspecs span{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:5px 10px}
+  .vdesc{color:var(--muted);font-size:14.5px;margin:0}
+  .vcard .btn{margin-top:auto}
+  .vempty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+  .vsoon{grid-column:1/-1;text-align:center;padding:64px 24px;border:1px dashed var(--border-2);border-radius:var(--radius);background:radial-gradient(600px 300px at 50% 0%,rgba(225,29,42,.12),transparent 60%),var(--surface)}
+  .vsoon-badge{display:inline-flex;align-items:center;gap:9px;background:rgba(225,29,42,.14);border:1px solid rgba(225,29,42,.45);color:#fff;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+  .vsoon-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(225,29,42,.22)}
+  .vsoon h2{font-size:clamp(30px,5vw,54px);text-transform:uppercase;margin:20px 0 12px}
+  .vsoon p{color:var(--muted);max-width:52ch;margin:0 auto 26px;font-size:16px}
+  .vmarquee{grid-column:1/-1;overflow:hidden;border-block:1px solid var(--border);background:var(--surface);border-radius:12px;margin-top:22px}
+  .vmtrack{display:flex;gap:42px;width:max-content;padding:14px 0;animation:vscroll 24s linear infinite}
+  .vmtrack span{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:.08em;color:var(--muted);display:inline-flex;align-items:center;gap:42px}
+  .vmtrack span::after{content:"●";color:var(--primary);font-size:10px}
+  @keyframes vscroll{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.vmtrack{animation:none}}
+  /* footer */
+  footer.ft{border-top:1px solid var(--border);background:var(--surface);padding:48px 0 28px}
+  .ft-in{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .ft a:hover{color:var(--primary)}
+  .ft .muted{color:var(--muted);font-size:14px}
+  .ft-contact{display:flex;gap:22px;flex-wrap:wrap;font-weight:600}
+  .ft-bottom{border-top:1px solid var(--border);margin-top:28px;padding-top:20px;color:var(--muted-2);font-size:13px}
+  /* mobile menu */
+  .mobile-menu{position:fixed;inset:76px 0 auto 0;z-index:99;background:var(--bg);border-bottom:1px solid var(--border);transform:translateY(-130%);transition:transform .3s var(--ease);padding:14px 24px 26px}
+  .mobile-menu.open{transform:translateY(0)}
+  .mobile-menu a{display:block;padding:14px 4px;font-size:17px;font-weight:600;border-bottom:1px solid var(--border)}
+  @media(max-width:1000px){.vgrid{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.burger{display:grid}}
+  @media(max-width:600px){.vgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="GC Performance — accueil"><img src="assets/logo-web.png" alt="GC Performance" /></a>
+    <nav class="nav-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#atelier">L'atelier</a>
+      <a href="index.html#galerie">Galerie</a>
+      <a href="vehicules.html" class="active">Véhicules en vente</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px">
+      <a href="tel:+33627857506" class="btn btn-primary">Nous appeler</a>
+      <button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#atelier">L'atelier</a>
+    <a href="index.html#galerie">Galerie</a>
+    <a href="vehicules.html">Véhicules en vente</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="tel:+33627857506" class="btn btn-primary" style="margin-top:14px">06 27 85 75 06</a>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Occasions</span>
+    <h1 class="display">Véhicules en vente</h1>
+    <p>Découvrez nos véhicules d'occasion — contrôlés et entretenus par notre atelier. Une question ? Contactez-nous, nous vous répondons rapidement.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="vgrid" id="vgrid">
+    <div class="vempty">Chargement des véhicules…</div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-in">
+      <a href="index.html" class="logo"><img src="assets/logo-web.png" alt="GC Performance" style="height:50px" /></a>
+      <div class="ft-contact">
+        <a href="tel:+33627857506">06 27 85 75 06</a>
+        <a href="mailto:gc.performance67@gmail.com">gc.performance67@gmail.com</a>
+        <span class="muted">38 Route de la Pépinière, 67160 Wissembourg</span>
+      </div>
+    </div>
+    <div class="ft-bottom">© <span id="year"></span> GC Performance — Garage multimarque Wissembourg. Membre du réseau Auto Primo.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const burger=document.getElementById('burger'), menu=document.getElementById('mobileMenu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const photoUrl = p => typeof p === 'string' ? p : (p && (p.image || p.photo || p.src) || '');
+  const ARR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  const CHK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  fetch('data/vehicules.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(d => {
+      const list = (d && d.vehicules) || [];
+      const grid = document.getElementById('vgrid');
+      if (!list.length) {
+        const m = '<span>Véhicules à venir</span><span>Selon les arrivages</span><span>Revenez bientôt</span>';
+        grid.innerHTML = `
+          <div class="vsoon">
+            <span class="vsoon-badge"><span class="dot"></span> À venir</span>
+            <h2 class="display">De nouveaux véhicules bientôt</h2>
+            <p>Nous proposons régulièrement des véhicules d'occasion, contrôlés et entretenus par notre atelier — selon les arrivages. Revenez bientôt ou contactez-nous pour connaître les disponibilités.</p>
+            <a class="btn btn-primary" href="tel:+33627857506">Nous contacter</a>
+          </div>
+          <div class="vmarquee"><div class="vmtrack">${m+m+m}</div></div>`;
+        return;
+      }
+      grid.innerHTML = list.map(v => {
+        const photos = (Array.isArray(v.photos) ? v.photos : (v.photo ? [v.photo] : [])).map(photoUrl).filter(Boolean);
+        const specs = [v.annee, v.km, v.carburant, v.boite].filter(Boolean).map(s => '<span>'+esc(s)+'</span>').join('');
+        const optText = o => typeof o === 'string' ? o : (o && (o.option || o.value || o.name) || '');
+        const opts = (v.options || []).map(optText).filter(Boolean).map(o => '<span>'+CHK+esc(o)+'</span>').join('');
+        const slides = photos.map((p,i) => `<img class="${i===0?'on':''}" src="${esc(p)}" alt="${esc(v.titre)}" loading="lazy">`).join('');
+        const dots = photos.length>1 ? '<div class="vdots">'+photos.map((_,i)=>`<i class="${i===0?'on':''}" data-i="${i}"></i>`).join('')+'</div>' : '';
+        const nav = photos.length>1 ? `<button class="vnav prev" aria-label="Photo précédente">${ARR}</button><button class="vnav next" aria-label="Photo suivante">${ARR}</button><span class="vcount">1/${photos.length}</span>` : '';
+        return `<article class="vcard">
+          <div class="vphoto" data-idx="0">${v.vendu?'<span class="vsold">Vendu</span>':''}<div class="vslides">${slides}</div>${nav}${dots}</div>
+          <div class="vbody">
+            <div class="vtop"><div class="vtitle">${esc(v.titre)}</div><div class="vprice">${esc(v.prix)}</div></div>
+            <div class="vspecs">${specs}</div>
+            ${opts?`<div class="vopts">${opts}</div>`:''}
+            <p class="vdesc">${esc(v.description)}</p>
+            <a class="btn btn-ghost" href="tel:+33627857506">Renseignements</a>
+          </div>
+        </article>`;
+      }).join('');
+
+      // Carrousels
+      grid.querySelectorAll('.vphoto').forEach(ph => {
+        const imgs = [...ph.querySelectorAll('.vslides img')];
+        if (imgs.length < 2) return;
+        const dots = [...ph.querySelectorAll('.vdots i')];
+        const count = ph.querySelector('.vcount');
+        const show = n => {
+          const i = (n + imgs.length) % imgs.length;
+          ph.dataset.idx = i;
+          imgs.forEach((im,k)=>im.classList.toggle('on',k===i));
+          dots.forEach((dt,k)=>dt.classList.toggle('on',k===i));
+          if (count) count.textContent = (i+1)+'/'+imgs.length;
+        };
+        ph.querySelector('.next').addEventListener('click', e=>{e.preventDefault();show(+ph.dataset.idx+1);});
+        ph.querySelector('.prev').addEventListener('click', e=>{e.preventDefault();show(+ph.dataset.idx-1);});
+        dots.forEach(dt=>dt.addEventListener('click', ()=>show(+dt.dataset.i)));
+      });
+    })
+    .catch(() => { document.getElementById('vgrid').innerHTML = '<div class="vempty">Impossible de charger les véhicules.</div>'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Langue de l'interface
+locale: fr
+
+# Dossier où sont rangées les photos téléversées depuis l'admin
+media_folder: "assets/vehicules"
+public_folder: "/assets/vehicules"
+
+collections:
+  - name: "vehicules"
+    label: "Véhicules en vente"
+    description: "Ajoutez, modifiez ou supprimez vos véhicules à vendre."
+    files:
+      - name: "liste"
+        label: "Liste des véhicules"
+        file: "data/vehicules.json"
+        fields:
+          - label: "Véhicules"
+            name: "vehicules"
+            label_singular: "Véhicule"
+            widget: "list"
+            summary: "{{fields.titre}} — {{fields.prix}}"
+            fields:
+              - { label: "Titre (marque + modèle)", name: "titre", widget: "string" }
+              - { label: "Prix", name: "prix", widget: "string", hint: "Ex : 14 900 €" }
+              - { label: "Année", name: "annee", widget: "string", required: false }
+              - { label: "Kilométrage", name: "km", widget: "string", required: false, hint: "Ex : 78 000 km" }
+              - { label: "Carburant", name: "carburant", widget: "select", options: ["Essence", "Diesel", "Hybride", "Électrique", "GPL"], required: false }
+              - { label: "Boîte de vitesses", name: "boite", widget: "select", options: ["Manuelle", "Automatique"], required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - label: "Photos"
+                name: "photos"
+                widget: "list"
+                label_singular: "Photo"
+                field: { label: "Photo", name: "photo", widget: "image" }
+              - label: "Options / équipements"
+                name: "options"
+                widget: "list"
+                label_singular: "Option"
+                required: false
+                field: { label: "Option", name: "option", widget: "string" }
+              - { label: "Vendu ?", name: "vendu", widget: "boolean", default: false }
