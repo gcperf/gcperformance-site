@@ -5,6 +5,11 @@ backend:
 # Langue de l'interface
 locale: fr
 
+# Branding de l'admin
+site_url: https://www.gcperformance67.fr
+display_url: https://www.gcperformance67.fr
+logo_url: /assets/logo-web.png
+
 # Dossier où sont rangées les photos téléversées depuis l'admin
 media_folder: "assets/vehicules"
 public_folder: "/assets/vehicules"
@@ -31,15 +36,16 @@ collections:
               - { label: "Carburant", name: "carburant", widget: "select", options: ["Essence", "Diesel", "Hybride", "Électrique", "GPL"], required: false }
               - { label: "Boîte de vitesses", name: "boite", widget: "select", options: ["Manuelle", "Automatique"], required: false }
               - { label: "Description", name: "description", widget: "text", required: false }
-              - label: "Photos"
+              - label: "Photos (la 1re = couverture)"
                 name: "photos"
-                widget: "list"
-                label_singular: "Photo"
-                field: { label: "Photo", name: "photo", widget: "image" }
+                widget: "image"
+                media_library:
+                  config:
+                    multiple: true
+                hint: "Sélectionnez plusieurs photos d'un coup. La 1re sera la photo de couverture (glissez pour réordonner)."
               - label: "Options / équipements"
                 name: "options"
-                widget: "list"
-                label_singular: "Option"
+                widget: "text"
                 required: false
-                field: { label: "Option", name: "option", widget: "string" }
+                hint: "Une option par ligne. Ex : Climatisation, GPS, Jantes alliage…"
               - { label: "Vendu ?", name: "vendu", widget: "boolean", default: false }

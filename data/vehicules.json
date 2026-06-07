@@ -1,25 +1,3 @@
 {
-  "vehicules": [
-    {
-      "photos": [
-        "/assets/vehicules/img_6946.jpeg",
-        "/assets/vehicules/img_6947.jpeg",
-        "/assets/vehicules/img_6945.jpeg",
-        "/assets/vehicules/img_6943.jpeg",
-        "/assets/vehicules/img_6944.jpeg",
-        "/assets/vehicules/img_6942.jpeg",
-        "/assets/vehicules/img_6941.jpeg",
-        "/assets/vehicules/img_6940.jpeg",
-        "/assets/vehicules/img_6939.jpeg"
-      ],
-      "annee": "2020",
-      "km": "131000km",
-      "boite": "Automatique",
-      "vendu": false,
-      "prix": "21900 €",
-      "titre": "Mercedes cla shooting break 200d Amg Line ",
-      "carburant": "Diesel",
-      "description": "CarPlay - coffre électrique- sièges chauffant av- sièges surpiqûre rouge - grand écran -  "
-    }
-  ]
+  "vehicules": []
 }

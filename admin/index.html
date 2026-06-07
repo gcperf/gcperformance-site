@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Admin — GC Performance</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <style>
+    /* Fond sombre pour l'écran de connexion (au lieu du blanc) */
+    html, body, #nc-root { background: #0A0A0B !important; }
+    /* Page de connexion Decap : centrage + accents GC Performance */
+    [class*="LoginPage"], [class*="Login__"] { background: radial-gradient(700px 400px at 50% 0%, rgba(225,29,42,.18), transparent 60%), #0A0A0B !important; }
+    /* Bouton de connexion en rouge GC */
+    [class*="LoginButton"], button[class*="Login"] {
+      background: #E11D2A !important; border-color: #E11D2A !important; color: #fff !important;
+      border-radius: 999px !important; font-weight: 700 !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Connexion (Netlify Identity) -->

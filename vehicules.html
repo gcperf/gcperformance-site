@@ -62,7 +62,9 @@
   .vopts{display:flex;flex-wrap:wrap;gap:7px}
   .vopts span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#d6d7dc;background:rgba(225,29,42,.1);border:1px solid rgba(225,29,42,.22);border-radius:999px;padding:4px 11px}
   .vopts span svg{width:13px;height:13px;color:var(--primary)}
-  .vsold{position:absolute;top:14px;left:14px;background:#dc2626;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;z-index:2}
+  .vsold{position:absolute;top:14px;left:14px;background:#dc2626;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;z-index:4}
+  .vgrad{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;background:linear-gradient(0deg,rgba(8,8,9,.88),transparent);pointer-events:none}
+  .vprice-tag{position:absolute;left:13px;bottom:13px;z-index:3;background:var(--primary);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.03em;line-height:1;padding:7px 15px;border-radius:11px;box-shadow:0 10px 24px -8px rgba(225,29,42,.7)}
   .vbody{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1}
   .vtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
   .vtitle{font-size:20px;font-weight:700}
@@ -182,21 +184,23 @@
         return;
       }
       grid.innerHTML = list.map(v => {
-        const photos = (Array.isArray(v.photos) ? v.photos : (v.photo ? [v.photo] : [])).map(photoUrl).filter(Boolean);
+        const photos = (Array.isArray(v.photos) ? v.photos : (v.photos ? [v.photos] : (v.photo ? [v.photo] : []))).map(photoUrl).filter(Boolean);
         const specs = [v.annee, v.km, v.carburant, v.boite].filter(Boolean).map(s => '<span>'+esc(s)+'</span>').join('');
         const optText = o => typeof o === 'string' ? o : (o && (o.option || o.value || o.name) || '');
-        const opts = (v.options || []).map(optText).filter(Boolean).map(o => '<span>'+CHK+esc(o)+'</span>').join('');
+        let optList = Array.isArray(v.options) ? v.options.map(optText) : (typeof v.options === 'string' ? v.options.split(/\r?\n|,|;/) : []);
+        optList = optList.map(o => String(o).trim()).filter(Boolean);
+        const opts = optList.map(o => '<span>'+CHK+esc(o)+'</span>').join('');
         const slides = photos.map((p,i) => `<img class="${i===0?'on':''}" src="${esc(p)}" alt="${esc(v.titre)}" loading="lazy">`).join('');
         const dots = photos.length>1 ? '<div class="vdots">'+photos.map((_,i)=>`<i class="${i===0?'on':''}" data-i="${i}"></i>`).join('')+'</div>' : '';
         const nav = photos.length>1 ? `<button class="vnav prev" aria-label="Photo précédente">${ARR}</button><button class="vnav next" aria-label="Photo suivante">${ARR}</button><span class="vcount">1/${photos.length}</span>` : '';
         return `<article class="vcard">
-          <div class="vphoto" data-idx="0">${v.vendu?'<span class="vsold">Vendu</span>':''}<div class="vslides">${slides}</div>${nav}${dots}</div>
+          <div class="vphoto" data-idx="0">${v.vendu?'<span class="vsold">Vendu</span>':''}<div class="vslides">${slides}</div><span class="vgrad"></span>${v.prix?`<span class="vprice-tag">${esc(v.prix)}</span>`:''}${nav}${dots}</div>
           <div class="vbody">
-            <div class="vtop"><div class="vtitle">${esc(v.titre)}</div><div class="vprice">${esc(v.prix)}</div></div>
+            <h3 class="vtitle">${esc(v.titre)}</h3>
             <div class="vspecs">${specs}</div>
             ${opts?`<div class="vopts">${opts}</div>`:''}
-            <p class="vdesc">${esc(v.description)}</p>
-            <a class="btn btn-ghost" href="tel:+33627857506">Renseignements</a>
+            ${v.description?`<p class="vdesc">${esc(v.description)}</p>`:''}
+            <a class="btn btn-primary" href="tel:+33627857506">Renseignements</a>
           </div>
         </article>`;
       }).join('');
