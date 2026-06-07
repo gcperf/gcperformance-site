@@ -278,11 +278,11 @@
     if(lastErr){ $('formErr').textContent='⚠️ Photo non envoyée : '+lastErr+' — vérifie que le bucket « '+cfg.bucket+' » existe (Storage) et est public.'; }
     renderThumbs();
   }
-  $('fileInput').addEventListener('change', e=>{ handleFiles(e.target.files); e.target.value=''; });
+  $('fileInput').addEventListener('change', e=>{ const arr=[...e.target.files]; e.target.value=''; handleFiles(arr); });
   const dz=$('dropZone');
   ;['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.borderColor='var(--primary)';}));
   ;['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.style.borderColor='';}));
-  dz.addEventListener('drop',e=>handleFiles(e.dataTransfer.files));
+  dz.addEventListener('drop',e=>handleFiles([...e.dataTransfer.files]));
 
   // ---------- SAVE / DELETE ----------
   $('saveBtn').onclick=async ()=>{
